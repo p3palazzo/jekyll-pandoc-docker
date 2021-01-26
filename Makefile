@@ -7,3 +7,10 @@ build : Dockerfile
 		--build-arg pandoc_version=$(PANDOC_VERSION) \
 		-t palazzo/jekyll-pandoc:$(JEKYLL_VERSION)-$(PANDOC_VERSION) \
 		.
+
+tufte : pandoc-sidenote/Dockerfile
+	docker build --pull \
+		--build-arg jekyll_version=$(JEKYLL_VERSION) \
+		--build-arg pandoc_version=$(PANDOC_VERSION) \
+		-t palazzo/jekyll-tufte:$(JEKYLL_VERSION) \
+		pandoc-sidenote/.
