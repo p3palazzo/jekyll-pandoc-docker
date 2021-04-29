@@ -18,4 +18,3 @@ RUN apk --no-cache add \
 	libffi \
 	lua5.3 \
 	lua5.3-lpeg
-

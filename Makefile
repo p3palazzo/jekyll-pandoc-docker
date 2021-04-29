@@ -1,20 +1,26 @@
 JEKYLL_VERSION = 4.2.0
 PANDOC_VERSION = 2.12
 
-push : build tufte
+push : palazzo/jekyll-pandoc palazzo/jekyll-tufte
 	docker push palazzo/jekyll-pandoc:$(JEKYLL_VERSION)-$(PANDOC_VERSION)
 	docker push palazzo/jekyll-tufte:$(JEKYLL_VERSION)-$(PANDOC_VERSION)
 
-build : Dockerfile
+palazzo/jekyll-pandoc : Dockerfile
 	docker build --pull \
 		--build-arg jekyll_version=$(JEKYLL_VERSION) \
 		--build-arg pandoc_version=$(PANDOC_VERSION) \
-		-t palazzo/jekyll-pandoc:$(JEKYLL_VERSION)-$(PANDOC_VERSION) \
+		-t $@ \
 		.
+	docker tag $@ \
+		$@:$(JEKYLL_VERSION)-$(PANDOC_VERSION)
 
-tufte : pandoc-sidenote/Dockerfile
+palazzo/jekyll-tufte : pandoc-sidenote/Dockerfile
 	docker build --pull \
 		--build-arg jekyll_version=$(JEKYLL_VERSION) \
 		--build-arg pandoc_version=$(PANDOC_VERSION) \
-		-t palazzo/jekyll-tufte:$(JEKYLL_VERSION)-$(PANDOC_VERSION) \
-		pandoc-sidenote/.
+		-t $@ \
+		./pandoc-sidenote/
+	docker tag $@ \
+		$@:$(JEKYLL_VERSION)-$(PANDOC_VERSION)
+
+# vim: set shiftwidth=2 tabstop=2 :
