@@ -1,5 +1,5 @@
 JEKYLL_VERSION = 4.2.0
-PANDOC_VERSION = 2.12
+PANDOC_VERSION = 2.14
 
 push : palazzo/jekyll-pandoc palazzo/jekyll-tufte
 	docker push palazzo/jekyll-pandoc:$(JEKYLL_VERSION)-$(PANDOC_VERSION)
