@@ -1,4 +1,4 @@
-ARG pandoc_version=2.14
+ARG pandoc_version=2.14.1
 ARG jekyll_version=4.2.0
 
 FROM pandoc/alpine-crossref:${pandoc_version} AS pandoc-base
