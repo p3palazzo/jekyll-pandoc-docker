@@ -1,7 +1,7 @@
-ARG pandoc_version=2.14.1
+ARG pandoc_version=2.16.1
 ARG jekyll_version=4.2.0
 
-FROM pandoc/alpine-crossref:${pandoc_version} AS pandoc-base
+FROM pandoc/crossref:${pandoc_version} AS pandoc-base
 
 FROM palazzo/jekyll:${jekyll_version} AS jekyll
 
