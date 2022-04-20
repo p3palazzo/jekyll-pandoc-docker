@@ -1,9 +1,9 @@
-ARG pandoc_version=2.14.1
+ARG pandoc_version=2.18
 ARG jekyll_version=4.2.0
 
-FROM pandoc/alpine-crossref:${pandoc_version} AS pandoc-base
+FROM pandoc/core:${pandoc_version} AS pandoc-base
 
-FROM alpine:3.12 AS pandoc-sidenote
+FROM alpine:3.14 AS pandoc-sidenote
 
 RUN apk update \
 	&& apk --no-cache add \
@@ -21,7 +21,6 @@ RUN gem install jekyll-pandoc -- --use-system-libraries
 
 COPY --from=pandoc-base \
 	/usr/local/bin/pandoc \
-	/usr/local/bin/pandoc-citeproc \
 	/usr/local/bin/pandoc-crossref \
 	/usr/local/bin/
 
